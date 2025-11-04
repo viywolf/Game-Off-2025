@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://s7yxjkky0pop"]
+
+[ext_resource type="Script" uid="uid://dj621pfik712u" path="res://scripts/spawnpoint.gd" id="1_oya5r"]
+[ext_resource type="Script" uid="uid://c3mb65ywblkkk" path="res://scripts/game_manager.gd" id="1_to7fh"]
+
+[sub_resource type="Curve2D" id="Curve2D_pnvhp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 353, -19, 0, 0, 0, 0, 546, -14, 0, 0, 0, 0, 637, 50, 0, 0, 0, 0, 661, 164, 0, 0, 0, 0, 667, 340, 0, 0, 0, 0, 661, 522, 0, 0, 0, 0, 635, 601, 0, 0, 0, 0, 490, 649, 0, 0, 0, 0, 255, 675, 0, 0, 0, 0, 65, 632, 0, 0, 0, 0, -20, 477, 0, 0, 0, 0, -35, 311, 0, 0, 0, 0, -30, 184, 0, 0, 0, 0, 21, 74, 0, 0, 0, 0, 123, 5, 0, 0, 0, 0, 353, -19)
+}
+point_count = 16
+
+[node name="Window" type="Node2D"]
+script = ExtResource("1_to7fh")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 575.0
+offset_bottom = 575.0
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_pnvhp")
+
+[node name="Spawnpoint" type="PathFollow2D" parent="Path2D"]
+position = Vector2(353, -19)
+rotation = 0.025900943
+script = ExtResource("1_oya5r")
+
+[node name="AllNotes" type="Node" parent="Path2D"]

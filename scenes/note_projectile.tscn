@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxpu7w00qf8al"]
+
+[ext_resource type="Script" uid="uid://cfd7ww2gka4h8" path="res://scripts/note_projectile.gd" id="1_nikk6"]
+
+[sub_resource type="Gradient" id="Gradient_4iah7"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nikk6"]
+gradient = SubResource("Gradient_4iah7")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4iah7"]
+size = Vector2(28, 11)
+
+[node name="NoteProjectile" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_nikk6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -4.7683716e-07)
+scale = Vector2(0.484375, 0.2109375)
+texture = SubResource("GradientTexture2D_nikk6")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_4iah7")
