@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://7s2njiex250w"]
+[gd_scene load_steps=6 format=3 uid="uid://7s2njiex250w"]
 
 [ext_resource type="Script" uid="uid://i6vk5yk38xv0" path="res://scripts/player.gd" id="1_3vyb7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3vyb7"]
+light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_u8vuu"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.519084)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_3vyb7"]
 gradient = SubResource("Gradient_u8vuu")
@@ -16,6 +19,7 @@ fill_from = Vector2(0.5, 0.5)
 radius = 22.0
 
 [node name="Player" type="CharacterBody2D"]
+material = SubResource("CanvasItemMaterial_3vyb7")
 script = ExtResource("1_3vyb7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

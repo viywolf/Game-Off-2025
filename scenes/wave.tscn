@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c358ko8fns760"]
+
+[ext_resource type="Script" uid="uid://iohym5tyf7tg" path="res://scripts/wave.gd" id="1_y5ysc"]
+
+[node name="Wave" type="Line2D"]
+script = ExtResource("1_y5ysc")
+curveness = Vector2(-50, 0)

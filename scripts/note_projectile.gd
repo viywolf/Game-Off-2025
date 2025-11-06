@@ -7,6 +7,6 @@ func _process(delta: float) -> void:
 	velocity = self.transform.x * speed * delta
 	move_and_slide()
 	# out of the game window
-	if(global_position.x > 800 or global_position.x < -100
-	or global_position.y > 800 or global_position.y < -100):
+	if(global_position.x > 2000 or global_position.x < -2000
+	or global_position.y > 2000 or global_position.y < -2000):
 		queue_free()

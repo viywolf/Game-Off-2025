@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxpu7w00qf8al"]
+[gd_scene load_steps=6 format=3 uid="uid://dxpu7w00qf8al"]
 
 [ext_resource type="Script" uid="uid://cfd7ww2gka4h8" path="res://scripts/note_projectile.gd" id="1_nikk6"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nikk6"]
+light_mode = 1
+
 [sub_resource type="Gradient" id="Gradient_4iah7"]
+colors = PackedColorArray(0.2832352, 0.5219593, 0.9172999, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nikk6"]
 gradient = SubResource("Gradient_4iah7")
@@ -11,6 +15,7 @@ gradient = SubResource("Gradient_4iah7")
 size = Vector2(28, 11)
 
 [node name="NoteProjectile" type="CharacterBody2D"]
+material = SubResource("CanvasItemMaterial_nikk6")
 motion_mode = 1
 script = ExtResource("1_nikk6")
 
