@@ -4,4 +4,8 @@
 
 [node name="Wave" type="Line2D"]
 script = ExtResource("1_y5ysc")
-curveness = Vector2(-50, 0)
+curveness = null
+point_pos_multiplier__x = null
+point_pos_multiplier__y = 0
+point_pos_array = null
+curveness_array = null
