@@ -2,10 +2,17 @@
 
 [ext_resource type="Script" uid="uid://iohym5tyf7tg" path="res://scripts/wave.gd" id="1_y5ysc"]
 
-[node name="Wave" type="Line2D"]
+[node name="WavePosition" type="CharacterBody2D"]
 script = ExtResource("1_y5ysc")
-curveness = null
-point_pos_multiplier__x = null
 point_pos_multiplier__y = 0
-point_pos_array = null
-curveness_array = null
+
+[node name="Wave" type="Line2D" parent="."]
+rotation = 3.9426987
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(846.3867, 21.972656, 876.75323, 16.685486, 908.59375, -7.03125, 954.6509, -22.155762, 981.34766, -14.355469, 1018.45703, 13.183594, 1058.9248, 21.794128, 1085.9788, 11.549377, 1124.5239, -16.149902, 1163.2813, -21.09375, 1190.6372, -8.239746, 1231.25, 18.75, 1267.7109, 20.02716, 1300, 0, 1318.457, -3.1835938, 1281.3477, 24.355469, 1254.6509, 32.15576, 1208.5938, 17.03125, 1176.7532, -6.685486, 1146.3867, -11.972656, 1102.2461, 7.9492188, 1072.2046, 28.566895, 1038.562, 30.76416, 1000, 10, 967.7109, -10.027161, 931.25, -8.75, 890.6372, 18.239746, 863.28125, 31.09375)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
