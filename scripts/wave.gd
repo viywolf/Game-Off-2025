@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	percentage_shown += curve_progress_speed * delta
 	#velocity = self.transform.x * speed * delta
 	#move_and_slide()
-	if(percentage_start == 1): delete_self = true
+	if(percentage_start >= 1): delete_self = true
 	if(delete_self == true):
 		queue_free()
 	draw_wave()
@@ -55,15 +55,17 @@ func draw_wave() -> void:
 	# Half the number
 	for i in range(temp_points_array.size()):
 		if(i%2 == 0):
-			temp_array2.append(temp_points_array[i])
+			# Minus the points by the line width to overlap properly
+			temp_array2.append(temp_points_array[i] + Vector2(0,-abs($Wave.width/2)))
 	# Reverse it so the points start from the end point of the previous collisions so 
 	# collision lines do not cross
 	temp_points_array.reverse()
 	# Half the number again before adding it to arr2
 	for i in range(temp_points_array.size()):
 		if(i%2 == 0):
-			# Add to the y value of every point to avoid collisions and close the polygon
-			temp_array2.append(temp_points_array[i] + Vector2(0,10))
+			# Add the points by the line width to overlap properly
+			temp_array2.append(temp_points_array[i] + Vector2(0,abs($Wave.width/2)))
 	$Area2D/CollisionPolygon2D.polygon = temp_array2
 	#"""
-	#$Area2D/Outline.points = $Area2D/CollisionPolygon2D.polygon
+	# For debugging
+	# $Area2D/Outline.points = $Area2D/CollisionPolygon2D.polygon
