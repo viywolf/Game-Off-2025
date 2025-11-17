@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://s7yxjkky0pop"]
+[gd_scene load_steps=9 format=3 uid="uid://s7yxjkky0pop"]
 
 [ext_resource type="Script" uid="uid://dj621pfik712u" path="res://scripts/spawnpoint.gd" id="1_oya5r"]
 [ext_resource type="Script" uid="uid://c3mb65ywblkkk" path="res://scripts/game_manager.gd" id="1_to7fh"]
 [ext_resource type="Texture2D" uid="uid://c8rlwxud5fagx" path="res://sprites/circle_border.png" id="2_qnju7"]
 [ext_resource type="Script" uid="uid://bmuce2fdkgria" path="res://scripts/wave_spawnpoint.gd" id="5_ato5p"]
+[ext_resource type="PackedScene" uid="uid://7s2njiex250w" path="res://scenes/player.tscn" id="5_syahi"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qnju7"]
 light_mode = 1
@@ -54,3 +55,5 @@ script = ExtResource("5_ato5p")
 
 [node name="AllWaves" type="Node2D" parent="WavePath2D"]
 position = Vector2(1200, -10)
+
+[node name="Player" parent="." instance=ExtResource("5_syahi")]

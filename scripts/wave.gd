@@ -9,8 +9,8 @@ extends CharacterBody2D
 @export var speed : float = 0
 @export var delete_self : bool = false
 @export var percentage_start : float = 0.0
-@export var percentage_shown : float = 1.0
-@export var curve_progress_speed : float = 0.0
+@export var percentage_shown : float = 0.2
+@export var curve_progress_speed : float = 0.1
 
 @onready var new_curve = Curve2D.new()
 
@@ -21,15 +21,17 @@ func _ready() -> void:
 	$Area2D.transform = $Wave.transform
 	draw_wave()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	percentage_start += curve_progress_speed * delta
 	percentage_shown += curve_progress_speed * delta
-	draw_wave()
-	velocity = self.transform.x * speed * delta
-	move_and_slide()
+	#velocity = self.transform.x * speed * delta
+	#move_and_slide()
 	if(percentage_start == 1): delete_self = true
 	if(delete_self == true):
 		queue_free()
+	draw_wave()
+	if($Area2D.overlaps_area(get_node("/root/Main/Window/Player/Area2D"))):
+		print("overlapping")
 
 func draw_wave() -> void:
 	$Wave.points.clear()
@@ -47,22 +49,21 @@ func draw_wave() -> void:
 			$Wave.add_point(curved_points[i])
 		else: pass
 	# Make collision shape
+	#"""
 	var temp_points_array : PackedVector2Array = $Wave.points.duplicate()
 	var temp_array2 : PackedVector2Array
 	# Half the number
 	for i in range(temp_points_array.size()):
-		if(i%6 == 0):
+		if(i%2 == 0):
 			temp_array2.append(temp_points_array[i])
 	# Reverse it so the points start from the end point of the previous collisions so 
 	# collision lines do not cross
 	temp_points_array.reverse()
 	# Half the number again before adding it to arr2
 	for i in range(temp_points_array.size()):
-		if(i%6 == 0):
+		if(i%2 == 0):
 			# Add to the y value of every point to avoid collisions and close the polygon
 			temp_array2.append(temp_points_array[i] + Vector2(0,10))
 	$Area2D/CollisionPolygon2D.polygon = temp_array2
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	print(str(area) + " touched from wave")
+	#"""
+	#$Area2D/Outline.points = $Area2D/CollisionPolygon2D.polygon
