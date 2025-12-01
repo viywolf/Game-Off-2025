@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1ab5t2hcu3d7"]
+
+[ext_resource type="Script" uid="uid://ca4tmmhybfi6r" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://wmxdk8p3hpso" path="res://sprites/menu_blank.png" id="2_8ln24"]
+[ext_resource type="PackedScene" uid="uid://204yal3w2vl6" path="res://scenes/button.tscn" id="4_wu84c"]
+[ext_resource type="FontFile" uid="uid://qobf4appg5s6" path="res://special/ByteBounce.ttf" id="5_rtw2f"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_l6cm7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(867, 548)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_8ln24")
+centered = false
+
+[node name="Title" type="Label" parent="."]
+offset_left = 64.00001
+offset_top = 223.0
+offset_right = 141.0
+offset_bottom = 234.0
+scale = Vector2(15, 15)
+theme_override_fonts/font = ExtResource("5_rtw2f")
+text = "Sound Waves"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" parent="." instance=ExtResource("4_wu84c")]
+offset_left = 82.99999
+offset_top = 558.99994
+offset_right = 143.0
+offset_bottom = 598.99994
+scale = Vector2(10, 10)
+
+[connection signal="pressed" from="Button" to="." method="_on_start_button_pressed"]

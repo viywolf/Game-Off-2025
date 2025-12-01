@@ -1,13 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://c358ko8fns760"]
+[gd_scene load_steps=3 format=3 uid="uid://c358ko8fns760"]
 
 [ext_resource type="Script" uid="uid://iohym5tyf7tg" path="res://scripts/wave.gd" id="1_y5ysc"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qnju7"]
+light_mode = 1
+
 [node name="WavePosition" type="CharacterBody2D"]
+material = SubResource("CanvasItemMaterial_qnju7")
 script = ExtResource("1_y5ysc")
 point_pos_multiplier__y = 0
 
 [node name="Wave" type="Line2D" parent="."]
 rotation = 3.9426987
+width = 5.0
 
 [node name="Area2D" type="Area2D" parent="."]
 

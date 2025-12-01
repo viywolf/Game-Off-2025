@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://204yal3w2vl6"]
+
+[ext_resource type="Texture2D" uid="uid://c5gkexoc4us8a" path="res://sprites/button.png" id="1_i7y4x"]
+[ext_resource type="Script" uid="uid://jmt0c8deakwl" path="res://scripts/button.gd" id="1_rhj8v"]
+[ext_resource type="Texture2D" uid="uid://df3dnsugr8p85" path="res://sprites/button_pressed.png" id="2_1bdt2"]
+[ext_resource type="FontFile" uid="uid://qobf4appg5s6" path="res://special/ByteBounce.ttf" id="2_3q610"]
+
+[node name="Button" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("1_i7y4x")
+texture_hover = ExtResource("2_1bdt2")
+script = ExtResource("1_rhj8v")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 2.0
+offset_right = 50.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("2_3q610")
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

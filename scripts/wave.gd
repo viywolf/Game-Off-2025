@@ -14,8 +14,22 @@ extends CharacterBody2D
 
 @onready var new_curve = Curve2D.new()
 
+var damage_done : bool = false
+
+const ALL_COLOURS : Array[Color] = [
+	Color(0.887, 0.449, 0.215, 1.0),
+	Color(0.891, 0.687, 0.178, 1.0),
+	Color(0.596, 0.794, 0.376, 1.0),
+	Color(0.149, 0.448, 0.761, 1.0),
+	Color(0.606, 0.235, 0.776, 1.0),
+	Color(1.0, 0.235, 0.571, 1.0),
+]
+
+signal player_hit
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	self.modulate = ALL_COLOURS.pick_random()
 	$Wave.rotation_degrees += 180
 	$Wave.position.x -= (point_pos_multiplier__x * number_of_points)/2
 	$Area2D.transform = $Wave.transform
@@ -30,8 +44,9 @@ func _physics_process(delta: float) -> void:
 	if(delete_self == true):
 		queue_free()
 	draw_wave()
-	if($Area2D.overlaps_area(get_node("/root/Main/Window/Player/Area2D"))):
-		print("overlapping")
+	if($Area2D.overlaps_area(get_node("/root/Main/Window/Player/Area2D")) and damage_done == false):
+		player_hit.emit()
+		damage_done = true
 
 func draw_wave() -> void:
 	$Wave.points.clear()
@@ -54,7 +69,7 @@ func draw_wave() -> void:
 	var temp_array2 : PackedVector2Array
 	# Half the number
 	for i in range(temp_points_array.size()):
-		if(i%2 == 0):
+		if(i%6 == 0):
 			# Minus the points by the line width to overlap properly
 			temp_array2.append(temp_points_array[i] + Vector2(0,-abs($Wave.width/2)))
 	# Reverse it so the points start from the end point of the previous collisions so 
@@ -62,7 +77,7 @@ func draw_wave() -> void:
 	temp_points_array.reverse()
 	# Half the number again before adding it to arr2
 	for i in range(temp_points_array.size()):
-		if(i%2 == 0):
+		if(i%6 == 0):
 			# Add the points by the line width to overlap properly
 			temp_array2.append(temp_points_array[i] + Vector2(0,abs($Wave.width/2)))
 	$Area2D/CollisionPolygon2D.polygon = temp_array2

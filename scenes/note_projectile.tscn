@@ -6,13 +6,13 @@
 light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_4iah7"]
-colors = PackedColorArray(0.2832352, 0.5219593, 0.9172999, 1, 1, 1, 1, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nikk6"]
 gradient = SubResource("Gradient_4iah7")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4iah7"]
-size = Vector2(28, 11)
+size = Vector2(28, 6)
 
 [node name="NoteProjectile" type="CharacterBody2D"]
 material = SubResource("CanvasItemMaterial_nikk6")
@@ -20,12 +20,15 @@ motion_mode = 1
 script = ExtResource("1_nikk6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -4.7683716e-07)
-scale = Vector2(0.484375, 0.2109375)
+visible = false
+scale = Vector2(0.484375, 0.115234375)
 texture = SubResource("GradientTexture2D_nikk6")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_4iah7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-666, 0)

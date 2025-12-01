@@ -1,10 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://s7yxjkky0pop"]
+[gd_scene load_steps=15 format=3 uid="uid://s7yxjkky0pop"]
 
 [ext_resource type="Script" uid="uid://dj621pfik712u" path="res://scripts/spawnpoint.gd" id="1_oya5r"]
 [ext_resource type="Script" uid="uid://c3mb65ywblkkk" path="res://scripts/game_manager.gd" id="1_to7fh"]
 [ext_resource type="Texture2D" uid="uid://c8rlwxud5fagx" path="res://sprites/circle_border.png" id="2_qnju7"]
 [ext_resource type="Script" uid="uid://bmuce2fdkgria" path="res://scripts/wave_spawnpoint.gd" id="5_ato5p"]
 [ext_resource type="PackedScene" uid="uid://7s2njiex250w" path="res://scenes/player.tscn" id="5_syahi"]
+[ext_resource type="Script" uid="uid://dqbndfiajh2mh" path="res://scripts/hearts.gd" id="6_qncfr"]
+[ext_resource type="Texture2D" uid="uid://dditkeou8fxo3" path="res://sprites/heart_1.png" id="7_k52h1"]
+[ext_resource type="Texture2D" uid="uid://c52arr3ddqj6n" path="res://sprites/heart_gone.png" id="8_shje2"]
+[ext_resource type="AudioStream" uid="uid://gffysmhy3pcd" path="res://sounds/Death sound.mp3" id="9_shje2"]
+[ext_resource type="AudioStream" uid="uid://c1wo30adn54jp" path="res://sounds/hit sound (2).mp3" id="10_shje2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ato5p"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qnju7"]
 light_mode = 1
@@ -24,6 +32,14 @@ point_count = 32
 [node name="Window" type="Node2D"]
 script = ExtResource("1_to7fh")
 
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(2000, 2000)
+offset_left = -662.0
+offset_top = -723.0
+offset_right = 1338.0
+offset_bottom = 1277.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ato5p")
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
 color = Color(0, 0, 0, 1)
@@ -33,6 +49,19 @@ material = SubResource("CanvasItemMaterial_qnju7")
 position = Vector2(330, 330)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_qnju7")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Border"]
+position = Vector2(-6.1035156e-05, 0)
+scale = Vector2(0.99999994, 0.99999994)
+gravity_scale = 0.0
+sleeping = true
+freeze = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Border/RigidBody2D"]
+position = Vector2(-379.99994, -308.75003)
+scale = Vector2(1.2499999, 1.2499999)
+build_mode = 1
+polygon = PackedVector2Array(230, -131, 144, -105, 53, -49, -20, 35, -66, 126, -85, 228, -73, 351, -54, 399, 26, 518, 110, 582, 200, 618, 347, 634, 507, 575, 625, 463, 676, 350, 690, 228, 639, 52, 551, -44, 426, -123, 275, -135)
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_pnvhp")
@@ -57,3 +86,41 @@ script = ExtResource("5_ato5p")
 position = Vector2(1200, -10)
 
 [node name="Player" parent="." instance=ExtResource("5_syahi")]
+position = Vector2(339, 333)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(339, 326)
+
+[node name="Hearts" type="HBoxContainer" parent="Camera2D"]
+offset_left = -826.0
+offset_top = -425.0
+offset_right = -770.0
+offset_bottom = -409.0
+scale = Vector2(3, 3)
+script = ExtResource("6_qncfr")
+
+[node name="Heart1" type="TextureButton" parent="Camera2D/Hearts"]
+layout_mode = 2
+texture_normal = ExtResource("7_k52h1")
+texture_disabled = ExtResource("8_shje2")
+
+[node name="Heart2" type="TextureButton" parent="Camera2D/Hearts"]
+layout_mode = 2
+texture_normal = ExtResource("7_k52h1")
+texture_disabled = ExtResource("8_shje2")
+
+[node name="Heart3" type="TextureButton" parent="Camera2D/Hearts"]
+layout_mode = 2
+texture_normal = ExtResource("7_k52h1")
+texture_disabled = ExtResource("8_shje2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+
+[node name="DeadSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_shje2")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_shje2")
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
