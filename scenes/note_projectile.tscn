@@ -32,3 +32,4 @@ shape = SubResource("RectangleShape2D_4iah7")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-666, 0)
+volume_db = 20.0

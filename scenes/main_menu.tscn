@@ -1,15 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1ab5t2hcu3d7"]
+[gd_scene load_steps=8 format=3 uid="uid://b1ab5t2hcu3d7"]
 
 [ext_resource type="Script" uid="uid://ca4tmmhybfi6r" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://wmxdk8p3hpso" path="res://sprites/menu_blank.png" id="2_8ln24"]
 [ext_resource type="PackedScene" uid="uid://204yal3w2vl6" path="res://scenes/button.tscn" id="4_wu84c"]
+[ext_resource type="AudioStream" uid="uid://bv1beuj6ovi0j" path="res://sounds/hit sound.mp3" id="5_8ln24"]
 [ext_resource type="FontFile" uid="uid://qobf4appg5s6" path="res://special/ByteBounce.ttf" id="5_rtw2f"]
+[ext_resource type="AudioStream" uid="uid://cdu0thvqdueyj" path="res://sounds/Menu song.mp3" id="6_rtw2f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtw2f"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_l6cm7")
 
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(2000, 2000)
+offset_left = -580.00006
+offset_top = -810.0
+offset_right = 1420.0
+offset_bottom = 1190.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_rtw2f")
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(867, 548)
+position = Vector2(926, 482)
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -33,5 +47,12 @@ offset_top = 558.99994
 offset_right = 143.0
 offset_bottom = 598.99994
 scale = Vector2(10, 10)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_8ln24")
+
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_rtw2f")
+autoplay = true
 
 [connection signal="pressed" from="Button" to="." method="_on_start_button_pressed"]

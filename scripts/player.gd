@@ -4,30 +4,35 @@ extends CharacterBody2D
 var idle : bool = true
 var facing : String = "down"
 
+@export var can_move : bool = 1
+
 func _physics_process(delta):
 	#velocity = Input.get_vector("left","right","up","down") * speed * delta
-	if(Input.is_action_pressed("down") or Input.is_action_pressed("up")
-		or Input.is_action_pressed("left") or Input.is_action_pressed("right")):
-		idle = false
-		if Input.is_action_pressed("left"):
-			velocity = Vector2(-1 * speed * delta,0)
-			facing = "side"
-			$AnimatedSprite2D.flip_h = false
-		elif Input.is_action_pressed("right"):
-			velocity = Vector2(1 * speed * delta,0)
-			facing = "side"
-			$AnimatedSprite2D.flip_h = true
-		if Input.is_action_pressed("up"):
-			velocity = Vector2(0,-1 * speed * delta)
-			facing = "up"
-		elif Input.is_action_pressed("down"):
-			velocity = Vector2(0,1 * speed * delta)
-			facing = "down"
+	if(can_move == false):
+		$AnimatedSprite2D.stop()
 	else:
-		velocity = Vector2.ZERO
-		idle = true
-	manage_animations()
-	move_and_slide()
+		if(Input.is_action_pressed("down") or Input.is_action_pressed("up")
+			or Input.is_action_pressed("left") or Input.is_action_pressed("right")):
+			idle = false
+			if Input.is_action_pressed("left"):
+				velocity = Vector2(-1 * speed * delta,0)
+				facing = "side"
+				$AnimatedSprite2D.flip_h = false
+			elif Input.is_action_pressed("right"):
+				velocity = Vector2(1 * speed * delta,0)
+				facing = "side"
+				$AnimatedSprite2D.flip_h = true
+			if Input.is_action_pressed("up"):
+				velocity = Vector2(0,-1 * speed * delta)
+				facing = "up"
+			elif Input.is_action_pressed("down"):
+				velocity = Vector2(0,1 * speed * delta)
+				facing = "down"
+		else:
+			velocity = Vector2.ZERO
+			idle = true
+		manage_animations()
+		move_and_slide()
 
 func manage_animations() -> void:
 	if(idle):

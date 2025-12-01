@@ -1,10 +1,16 @@
-[gd_scene load_steps=33 format=3 uid="uid://bts81pv0fs363"]
+[gd_scene load_steps=39 format=3 uid="uid://bts81pv0fs363"]
 
 [ext_resource type="Script" uid="uid://csdulh26307go" path="res://scripts/cutscene.gd" id="1_a320b"]
 [ext_resource type="FontFile" uid="uid://qobf4appg5s6" path="res://special/ByteBounce.ttf" id="2_0sipp"]
 [ext_resource type="Texture2D" uid="uid://bt7b6vtu3rel5" path="res://sprites/MC_cutscene_1.png" id="2_fs8wb"]
 [ext_resource type="Texture2D" uid="uid://cj75rt7rybnvv" path="res://sprites/boss_cutscene.png" id="3_bb0yx"]
 [ext_resource type="Texture2D" uid="uid://e6b1hftop2we" path="res://sprites/Epilogue_cutscene.png" id="4_3ptll"]
+[ext_resource type="Texture2D" uid="uid://cjlbv1vpksfif" path="res://sprites/win_screen.png" id="6_bb0yx"]
+[ext_resource type="Texture2D" uid="uid://duwjx0wqc5ta2" path="res://sprites/next_arrow.png" id="6_d18fx"]
+[ext_resource type="Texture2D" uid="uid://d1hle6hk6s71h" path="res://sprites/next_button_flash.png" id="7_75brc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d18fx"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fs8wb"]
 atlas = ExtResource("3_bb0yx")
@@ -223,13 +229,39 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bb0yx"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_v50sc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_d18fx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_75brc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ptll"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="Cutscene" type="Node2D"]
 script = ExtResource("1_a320b")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(2000, 2000)
+offset_left = -580.00006
+offset_top = -810.0
+offset_right = 1420.0
+offset_bottom = 1190.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_d18fx")
 
 [node name="CurrentFrame" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3.6, 3.6)
 sprite_frames = SubResource("SpriteFrames_ji8cb")
-animation = &"EpilougeBoss"
+animation = &"RestOfTheEpilouge"
 centered = false
 
 [node name="Label" type="Label" parent="CurrentFrame"]
@@ -257,4 +289,34 @@ scale = Vector2(0.27790383, 0.2510069)
 theme_override_styles/panel = SubResource("StyleBoxFlat_bb0yx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-149, -2)
 anchor_mode = 0
+
+[node name="Arrow" type="AnimatedSprite2D" parent="."]
+position = Vector2(1642.0001, 787.00006)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_v50sc")
+
+[node name="WinScreen" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(2000, 2000)
+offset_left = -96.0
+offset_top = -564.0
+offset_right = 1904.0
+offset_bottom = 1436.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3ptll")
+
+[node name="Sprite2D" type="Sprite2D" parent="WinScreen"]
+position = Vector2(909, 947)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_bb0yx")
+
+[node name="Label" type="Label" parent="WinScreen"]
+layout_mode = 0
+offset_left = 248.00003
+offset_top = 606.00006
+offset_right = 296.00003
+offset_bottom = 629.00006
+scale = Vector2(15, 15)
+theme_override_fonts/font = ExtResource("2_0sipp")
+text = "You win!"

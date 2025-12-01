@@ -18,6 +18,7 @@ offset_left = 10.0
 offset_top = 2.0
 offset_right = 50.0
 offset_bottom = 25.0
+theme_override_constants/line_spacing = -5
 theme_override_fonts/font = ExtResource("2_3q610")
 text = "Start"
 horizontal_alignment = 1

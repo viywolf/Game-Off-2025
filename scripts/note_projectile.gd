@@ -47,7 +47,6 @@ func _ready() -> void:
 		$Sprite2D.visible = true
 	else:
 		$Area2D.queue_free()
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

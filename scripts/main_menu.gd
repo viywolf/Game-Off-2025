@@ -2,10 +2,7 @@ extends Node2D
 
 signal start_game
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-	
-
 func _on_start_button_pressed() -> void:
+	$AudioStreamPlayer.play()
+	await get_tree().create_timer(0.5).timeout
 	start_game.emit()
