@@ -289,7 +289,6 @@ scale = Vector2(0.27790383, 0.2510069)
 theme_override_styles/panel = SubResource("StyleBoxFlat_bb0yx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-149, -2)
 anchor_mode = 0
 
 [node name="Arrow" type="AnimatedSprite2D" parent="."]

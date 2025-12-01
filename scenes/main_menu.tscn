@@ -23,8 +23,9 @@ scale = Vector2(1.5, 1.5)
 theme_override_styles/panel = SubResource("StyleBoxFlat_rtw2f")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(926, 482)
+position = Vector2(0, 62.999996)
 scale = Vector2(0.99999994, 0.99999994)
+anchor_mode = 0
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("2_8ln24")
